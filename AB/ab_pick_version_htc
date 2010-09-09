@@ -1,0 +1,53 @@
+#!/bin/bash
+ 
+version=$1
+
+while :
+do
+ clear
+
+clear_screen=yes
+
+ echo 
+ echo "============================================================"
+ echo " Android Builder $version - by  (xda-developers.com)"
+ echo "============================================================"
+ echo
+ echo " Select the device and android version that you want to build"
+ echo " This will download AOSP source, kernel source, compile"
+ echo " both, build the ROM, and place it in the original_update"
+ echo " folder."
+ echo
+ echo "============================================================"
+ echo " Example: Option 41 = Eris + Cupcake (1.5) " 
+ echo 
+ echo " 1. HTC Bravo      - (1)Cupcake (2)Donut (3)Eclair (4) Froyo"
+ echo " 2. HTC Click      - (1)Cupcake (2)Donut (3)Eclair (4) Froyo"
+ echo " 3. HTC Dream      - (1)Cupcake (2)Donut (3)Eclair (4) Froyo"
+ echo " 4. HTC Eris       - (1)Cupcake (2)Donut (3)Eclair (4) Froyo" 
+ echo " 5. HTC Hero       - (1)Cupcake (2)Donut (3)Eclair (4) Froyo"
+ echo " 6. HTC Incredible - (1)Cupcake (2)Donut (3)Eclair (4) Froyo"
+ echo " 7. HTC Legend     - (1)Cupcake (2)Donut (3)Eclair (4) Froyo"
+ echo " 8. HTC Sapphire   - (1)Cupcake (2)Donut (3)Eclair (4) Froyo" 
+ echo ""
+ echo " 0. Exit"
+ echo ""
+ echo -n "Please enter option number: "
+ read opt
+ case $opt in
+   41) clear; export AOSP_VERSION=cupcake; export KERNEL_DIR=$KITCHEN_ROOT/builder/source/kernels/eris/2.6.27/; export KERNEL_VER=eris.2.6.27; $KITCHEN_ROOT/scripts/plugins/AB/ab_create_repo_cupcake; $KITCHEN_ROOT/scripts/plugins/AB/ab_get_Eris.27; $KITCHEN_ROOT/scripts/plugins/AB/ab_compile_AOSP;;
+   42) clear; export AOSP_VERSION=donut; export KERNEL_DIR=$KITCHEN_ROOT/builder/source/kernels/eris/2.6.29/; export KERNEL_VER=eris.2.6.29; $KITCHEN_ROOT/scripts/plugins/AB/ab_create_repo_donut; $KITCHEN_ROOT/scripts/plugins/AB/ab_get_Eris.27; $KITCHEN_ROOT/scripts/plugins/AB/ab_compile_AOSP;;
+   43) clear; export AOSP_VERSION=eclair; export KERNEL_DIR=$KITCHEN_ROOT/builder/source/kernels/eris/2.6.29/; export KERNEL_VER=eris.2.6.29; $KITCHEN_ROOT/scripts/plugins/AB/ab_create_repo_eclair; $KITCHEN_ROOT/scripts/plugins/AB/ab_get_Eris.29; $KITCHEN_ROOT/scripts/plugins/AB/ab_compile_AOSP;;
+   44) clear; export AOSP_VERSION=froyo; export KERNEL_DIR=$KITCHEN_ROOT/builder/source/kernels/eris/2.6.29/; export KERNEL_VER=eris.2.6.29; $KITCHEN_ROOT/scripts/plugins/AB/ab_create_repo_froyo; $KITCHEN_ROOT/scripts/plugins/AB/ab_get_Eris.29; $KITCHEN_ROOT/scripts/plugins/AB/ab_compile_AOSP;;
+  0) exit 1;;
+   *) echo "Invalid option"; clear_screen=no;;
+ esac
+
+ if [ "$clear_screen" == "yes" ]
+ then
+   echo
+   echo "Press Enter to continue"
+   read enterKey
+ fi
+
+done
